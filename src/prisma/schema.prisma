@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  name     String?
+  email    String    @unique
+  password String
+  imobis   Imobi[]   
+  messages Messages[] 
+}
+
+model Imobi {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  tipo       String?
+  thumb      String?
+  endereco   String?
+  cidade     String?
+  uf         String?
+  valor      Float?
+  descricao  String?
+  name       String?
+  email      String?
+  telefone   String?
+  slug       String?
+  userId     String   @db.ObjectId
+  created_at DateTime @default(now())
+  author     User     @relation(fields: [userId], references: [id])  
+}
+
+model Messages {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId  
+  client_name     String
+  client_email    String
+  client_mensagem String
+  userId          String @db.ObjectId // Relacionamento com o ID de User
+  author          User   @relation(fields: [userId], references: [id])  
+
+  @@map("messages")
+}
