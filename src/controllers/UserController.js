@@ -17,7 +17,7 @@ export default {
                     error: true,
                     message: "Usuario já existe",
                     user
-                    
+
                 })
             }
             const salt = await bcrypt.genSalt(10)
@@ -39,7 +39,9 @@ export default {
 
 
         } catch (error) {
-            return res.status(500).json({ message: "Erro ao criar usuario" })
+            console.error("❌ Erro ao criar usuário:", error);
+            return res.status(500).json({ message: "Erro ao criar usuario", error: error.message });
+
         }
     },
 
