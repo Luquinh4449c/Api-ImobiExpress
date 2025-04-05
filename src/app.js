@@ -9,14 +9,22 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-app.use(cors());
+// ✅ CORS com domínio do front (local + vercel)
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://imobi-exspress-res.vercel.app'
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+
 app.use('/uploads', express.static(path.join(__dirname, "uploads")));
 app.use(express.json());
 app.use(router);
 
-// 🚀 Correção aqui:
 const PORT = process.env.PORT || 8000;
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
