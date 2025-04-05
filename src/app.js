@@ -9,9 +9,18 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// ✅ Libera CORS para o domínio da Vercel
+// 👇 Permitir requisições da Vercel
+const allowedOrigins = ['https://imobi-exspress-res.vercel.app'];
+
 app.use(cors({
-  origin: "https://imobi-exspress-res.vercel.app"
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
 
 app.use('/uploads', express.static(path.join(__dirname, "uploads")));
@@ -19,7 +28,6 @@ app.use(express.json());
 app.use(router);
 
 const PORT = process.env.PORT || 8000;
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
