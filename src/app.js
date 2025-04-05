@@ -13,7 +13,7 @@ const app = express();
 const allowedOrigins = [
   'https://imobi-exspress-res.vercel.app',
   'https://imobi-exspress.vercel.app',
-  'https://imobi-exspress-gt1uigp9s-lucas-miguels-projects-36305e90.vercel.app'
+   'https://imobi-exspress-p7pvqw2em-lucas-miguels-projects-36305e90.vercel.app/'
 ];
 
 app.use(cors({
@@ -27,6 +27,10 @@ app.use(cors({
   },
   credentials: true
 }));
+
+// Antes das rotas
+app.options('*', cors());
+
 
 // 🗂️ Arquivos estáticos
 app.use('/uploads', express.static(path.join(__dirname, "uploads")));
