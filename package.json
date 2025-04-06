@@ -6,11 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "node src/app.js",
-    //"postinstall": "npx prisma generate"
+    "dev": "node src/app.js"
   },
   "prisma": {
-   // "schema": "prisma/schema.prisma"
+    "schema": "prisma/schema.prisma"
   },
   "keywords": [],
   "author": "",
