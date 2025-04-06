@@ -7,10 +7,10 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "node src/app.js",
-    "postinstall": "npx prisma generate"
+    //"postinstall": "npx prisma generate"
   },
   "prisma": {
-    "schema": "prisma/schema.prisma"
+   // "schema": "prisma/schema.prisma"
   },
   "keywords": [],
   "author": "",
